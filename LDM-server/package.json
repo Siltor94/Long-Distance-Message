@@ -1,0 +1,21 @@
+{
+  "name": "ldm-server",
+  "version": "1.0.0",
+  "description": "chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "ionic2",
+    "ionic2-chat",
+    "chat",
+    "nod",
+    "realtime"
+  ],
+  "author": "Siltor94",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.0.1"
+  }
+}

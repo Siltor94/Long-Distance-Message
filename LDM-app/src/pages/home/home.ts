@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+
+import { MessagesPage } from '../messages/messages';
+
 import * as io from 'socket.io-client';
 
 
@@ -8,8 +11,8 @@ import * as io from 'socket.io-client';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  socket:any
-  chat_input:string;
+  socket: any
+  chat_input: string;
   chats = [];
 
   constructor(public navCtrl: NavController) {
@@ -22,9 +25,20 @@ export class HomePage {
   }
 
   send(msg) {
-        if(msg != ''){
-            this.socket.emit('message', msg);
-        }
-        this.chat_input = '';
+    if (msg != '') {
+      this.socket.emit('message', msg);
     }
+    this.chat_input = '';
+  }
+
+  goToPage(i: number): void {
+    switch (i) {
+      case 1:
+        this.navCtrl.push(MessagesPage);
+        break;
+    
+      default:
+        break;
+    }
+  }
 }

@@ -6,8 +6,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content id="body" padding>
+  <!--<ion-list>
     <ion-item *ngFor="let message of chats">{{message}}</ion-item>
   </ion-list>
 
@@ -15,5 +15,28 @@
     <ion-input type="text" [(ngModel)]="chat_input" placeholder="Enter message"></ion-input>
   </ion-item>
 
-  <button ion-button block (click)="send(chat_input)">Send</button>
+  <button ion-button block (click)="send(chat_input)">Send</button>-->
+  <div>
+    <div class="menu-button">
+      <ion-icon id="icon-m" name="ios-mail"></ion-icon>
+      <p> Message </p>
+    </div>
+
+    <div class="menu-button">
+      <ion-icon id="icon-m" name="ios-contact"></ion-icon>
+      <p> Contact </p>
+    </div>
+
+    <div class="menu-button">
+      <ion-icon id="icon-m" name="ios-call"></ion-icon>
+      <p> Appel </p>
+    </div>
+
+    <div class="menu-button">
+      <ion-icon id="icon-m" name="ios-settings"></ion-icon>
+      <p> Paramètres </p>
+    </div>
+
+  </div>
+
 </ion-content>

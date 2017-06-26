@@ -6,12 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts } from '@ionic-native/contacts';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { contactList } from '../pages/contact-list/contact-list';
+import { contactPage } from '../pages/contact-page/contact-page';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    contactList,
+    contactPage
   ],
   imports: [
     BrowserModule,
@@ -20,7 +22,8 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    contactList,
+    contactPage
   ],
   providers: [
     Contacts,

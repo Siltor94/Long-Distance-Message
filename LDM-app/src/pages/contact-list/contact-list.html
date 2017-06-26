@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group *ngFor="let group of groupedContacts">
+    <ion-item-divider color="light">{{group.letter}}</ion-item-divider>
+     <button ion-item *ngFor="let contact of group.contacts" (click)="go_contact(contact)" class="contactlist">
+       {{contact.name}}
+       <p>{{contact.number}}</p>
+       <p>{{contact.addresses}}</p>
+     </button>
+  </ion-item-group>
+</ion-content>
+<!--
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let message of chats">{{message}}</ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-input type="text" [(ngModel)]="chat_input" placeholder="Enter message"></ion-input>
+  </ion-item>
+
+  <button ion-button block (click)="send(chat_input)">Send</button>
+</ion-content>-->

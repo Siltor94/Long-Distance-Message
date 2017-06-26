@@ -1,21 +1,22 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Contacts } from '@ionic-native/contacts';
-import * as io from 'socket.io-client';
+import { contactPage } from '../contact-page/contact-page';
 
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-contact-list',
+  templateUrl: 'contact-list.html'
 })
-export class HomePage {
-  socket:any
+export class contactList {
   chat_input:string;
+  pushPage: any;
   chats = [];
   contacts = []
   groupedContacts = []
 
   constructor(public navCtrl: NavController, public contact: Contacts) {
+
     contact.find(["displayName", "phoneNumbers"], {multiple: true, hasPhoneNumber: true}).then((contacts) => {
 
     for (var i=0 ; i < contacts.length; i++){
@@ -23,6 +24,7 @@ export class HomePage {
        var obj = {};
        obj["name"] = contacts[i].displayName;
        obj["number"] = contacts[i].phoneNumbers[0].value;
+       obj["addresses"] = contacts[i].addresses ? contacts[i].addresses[0].streetAddress : " ";
        this.contacts.push(obj)    // adding in separate array with keys: name, number
      }      
     }
@@ -31,11 +33,15 @@ export class HomePage {
   })
 }
 
+go_contact(txt) {
+  this.navCtrl.push(contactPage, {param : txt});
+}
+
 groupContacts(contacts){
 
   let sortedContacts = contacts.sort(function(a, b){
-    if(String(a.name).toLowerCase() < String(b.name).toLowerCase()) return -1;
-    if(String(a.name).toLowerCase() > String(b.name).toLowerCase()) return 1;
+    if(String(a.name).toUpperCase() < String(b.name).toUpperCase()) return -1;
+    if(String(a.name).toUpperCase() > String(b.name).toUpperCase()) return 1;
     return 0;
    });
 
@@ -43,11 +49,11 @@ groupContacts(contacts){
   let currentContacts = [];
 
   sortedContacts.forEach((value, index) => {
-    if(String(value.name.charAt(0)).toLowerCase() != currentLetter){
-      currentLetter = String(value.name.charAt(0)).toLowerCase();
+    if(String(value.name.charAt(0)).toUpperCase() != currentLetter){
+      currentLetter = String(value.name.charAt(0)).toUpperCase();
 
       let newGroup ={
-        letter: String(currentLetter).toLowerCase(),
+        letter: String(currentLetter).toUpperCase(),
         contacts:[]
       };
 
@@ -57,11 +63,4 @@ groupContacts(contacts){
     currentContacts.push(value);
   });
 }
-
-  send(msg) {
-        if(msg != ''){
-            this.socket.emit('message', msg);
-        }
-        this.chat_input = '';
-    }
 }

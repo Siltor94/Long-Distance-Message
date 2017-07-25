@@ -1,0 +1,42 @@
+<ion-header>
+	<ion-navbar hideBackButton>
+
+		<ion-buttons left>
+			<button ion-button class="back-arrow" (touchstart)="back($event)">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+		</ion-buttons>
+
+		<ion-title>{{user}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content fixed scrollDownOnLoad="true" (tap)="contentMouseDown($event)" ionScrollEnd="hideKeybaord()">
+	<ion-list no-lines>
+		<ion-item *ngFor="let msg of messages">
+			<chat-bubble [message]="msg"></chat-bubble>
+		</ion-item>
+	</ion-list>
+</ion-content>
+
+<ion-footer (touchstart)="footerTouchStart($event)">
+	<ion-toolbar>
+
+		<ion-buttons left>
+			<button class="add-image-button" item-right (touchstart)="touchImageButton($event)">
+				 <ion-icon class="add-image-icon" name="images"></ion-icon>
+	        </button>
+		</ion-buttons>
+
+		<textarea spellcheck="true" autoComplete="true" autocorrect="true" (ngModelChange)="textAreaChange()" rows="1" fz-elastic
+			class="chat-input" [(ngModel)]="message" placeholder="Write a message..." (keyup.enter)="sendMessage()">
+		</textarea>
+
+		<ion-buttons right>
+			<button [disabled]="!message" class="send-button" item-right id="send-button" (touchstart)="touchSendButton($event)">
+				 <ion-icon class="send-icon" name="send"></ion-icon>
+	        </button>
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-footer>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
+import { SendMessagePage } from '../send-message/send-message';
 
 @Component({
   selector: 'page-messages',
@@ -12,4 +12,7 @@ export class MessagesPage {
   constructor(public navCtrl: NavController) {
   }
 
+  showMessages(user: String){
+    this.navCtrl.push(SendMessagePage, {user: user})
+  }
 }

@@ -8,27 +8,44 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MessagesPage } from '../pages/messages/messages';
 
+import { SendMessagePage } from '../pages/send-message/send-message';
+import { ChatBubble } from '../components/chat-bubble/chat-bubble';
+import { keyboardFix } from '../components/keyboard-fix/keyboard-fix'
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    MessagesPage
+    MessagesPage,
+    SendMessagePage,
+    ChatBubble,
+    keyboardFix
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp, {
+        ios: {
+          scrollAssist: false, 
+          autoFocusAssist: false,
+          inputBlurring: false
+        }
+    }
+)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    MessagesPage
+    MessagesPage,
+    SendMessagePage,
+    ChatBubble
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

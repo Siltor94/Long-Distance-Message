@@ -76,3 +76,8 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+$chat-bubble:(
+  background-left: #f2f2f2,
+  background-right: #005677,
+);

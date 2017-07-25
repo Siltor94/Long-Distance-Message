@@ -1,0 +1,137 @@
+.chatBubble{
+
+  //position: relative;
+
+  // :last-child {
+  //   margin-bottom: 10px;
+  // }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .profile-pic.left {
+    left: 10px;
+  }
+
+  .profile-pic.right {
+    right: 10px;
+  }
+
+  .message {
+    font-size: small;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  .message-detail {
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: right;
+  }
+
+  .message-detail-img {
+    white-space: nowrap;
+    font-size: 12px;
+    text-align: right;
+    position: absolute;
+    right: 7.5px;
+    bottom: 10px;
+  }
+
+  .chat-bubble {
+    border-radius: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    position: relative;
+    margin: 10px;
+    // box-shadow: 1px 1px 5px #000;
+    max-width: 80%;
+  }
+
+
+  .chat-bubble-img {
+   background: transparent;
+    position: relative;
+    max-width: 80%;
+  }
+
+  .chat-bubble:before {
+    content: "\00a0";
+    display: block;
+    height: 16px;
+    width: 9px;
+    position: absolute;
+    bottom: -7.5px;
+  }
+
+  .chat-bubble.left {
+    background-color: map-get($chat-bubble, background-left);
+    float: left;
+    //margin-left: 45px;
+  }
+
+  .chat-bubble-img.left {
+    float: left;
+    margin-left: 7.5px;
+  }
+
+  .chat-bubble.left:before {
+    left: -15px;
+    top: -5px;
+    content: "";
+    position: absolute;
+    border: 0 solid transparent;
+    border-top: 9px solid map-get($chat-bubble, background-left);
+    border-radius: 0 20px 0;
+    width: 15px;
+    height: 30px;
+    transform: rotate(145deg);
+    -webkit-transform: rotate(145deg);
+  }
+
+  .chat-bubble.right {
+    background-color: map-get($chat-bubble, background-right);
+    color: white;
+    float: right;
+    //margin-right: 45px;
+  }
+
+  .chat-bubble-img.right {
+    color: white;
+    float: right;
+    margin-right: 7.5px;
+  }
+
+  .chat-bubble.right:before {
+    right: -15px;
+    top: -5px;
+    content: "";
+    position: absolute;
+    border: 0 solid transparent;
+    border-top: 9px solid map-get($chat-bubble, background-right);
+    border-radius: 20px 0px 20px;
+    width: 15px;
+    height: 30px;
+    -webkit-transform: rotate(220deg);
+    transform: rotate(220deg);
+
+  }
+
+  .chat-bubble.right a.autolinker {
+    color: #000;
+    font-weight: bold;
+  }
+
+  img {
+    border-radius: 10px;
+  }
+
+}

@@ -230,44 +230,6 @@ export class SendMessagePage {
       position: 'left',
       body: 'aaa',
       timestamp: new Date(),
-    },
-    {
-      position: 'right',
-      body: 'bbb',
-      timestamp: new Date(),
-    },
-    {
-      position: 'left',
-      body: 'ccc',
-      timestamp: new Date(),
-    },
-    {
-      position: 'right',
-      body: 'ddd',
-      timestamp: new Date(),
-    },
-    {
-      position: 'left',
-      body: 'eee',
-      timestamp: new Date(),
-
-    },
-    {
-      position: 'right',
-      body: 'fff',
-      timestamp: new Date(),
-
-    },
-    {
-      position: 'left',
-      body: 'fff',
-      timestamp: new Date(),
-
-    },
-    {
-      position: 'right',
-      body: 'fff',
-      timestamp: new Date(),
     }
   ];
 

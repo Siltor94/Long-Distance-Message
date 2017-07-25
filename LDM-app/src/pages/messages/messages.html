@@ -74,11 +74,14 @@
             <h2>Peter</h2>
             <p>What?</p>
         </ion-item>
-
-
     </ion-list>
 
     <ion-textarea spellcheck="on" autocomplete="true">
     </ion-textarea>
 
+    <ion-fab bottom right>
+        <button (click)="newMessage()" color="dark" ion-fab>
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>

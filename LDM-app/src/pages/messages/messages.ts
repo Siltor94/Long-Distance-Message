@@ -15,4 +15,8 @@ export class MessagesPage {
   showMessages(user: String){
     this.navCtrl.push(SendMessagePage, {user: user})
   }
+
+  newMessage(){
+    this.navCtrl.push(SendMessagePage)
+  }
 }

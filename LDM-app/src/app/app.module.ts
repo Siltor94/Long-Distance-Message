@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts } from '@ionic-native/contacts';
-
+import { HomePage } from '../pages/home/home';
 import { MyApp } from './app.component';
 import { contactList } from '../pages/contact-list/contact-list';
 import { contactPage } from '../pages/contact-page/contact-page';
@@ -12,6 +12,7 @@ import { contactPage } from '../pages/contact-page/contact-page';
 @NgModule({
   declarations: [
     MyApp,
+    HomePage,
     contactList,
     contactPage
   ],
@@ -22,6 +23,7 @@ import { contactPage } from '../pages/contact-page/contact-page';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    HomePage,
     contactList,
     contactPage
   ],

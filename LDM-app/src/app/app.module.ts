@@ -23,7 +23,7 @@ import { HttpModule } from '@angular/http';
     MyApp,
     HomePage,
     contactList,
-    contactPage
+    contactPage,
     MessagesPage,
     SendMessagePage,
     ChatBubble,
@@ -47,7 +47,7 @@ import { HttpModule } from '@angular/http';
     MyApp,
     HomePage,
     contactList,
-    contactPage
+    contactPage,
     MessagesPage,
     SendMessagePage,
     ChatBubble

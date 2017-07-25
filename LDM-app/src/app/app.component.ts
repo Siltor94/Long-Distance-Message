@@ -4,6 +4,7 @@ import { SendMessagePage } from '../pages/send-message/send-message';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { HomePage } from '../pages/home/home';
+
 @Component({
   templateUrl: 'app.html',
   providers: [Keyboard]

@@ -3,10 +3,11 @@
     <name>LDM-app</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://172.16.34.60:8100" />
+    <content original-src="index.html" src="http://172.16.34.59:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-navigation href="http://172.16.34.60:8100" />
+    <allow-navigation href="http://172.16.34.59:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -78,7 +79,7 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
-    <engine name="android" spec="^6.2.3" />
+    <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-contacts" spec="^2.3.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />

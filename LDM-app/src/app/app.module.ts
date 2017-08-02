@@ -16,7 +16,7 @@ import { ChatBubble } from '../components/chat-bubble/chat-bubble';
 import { keyboardFix } from '../components/keyboard-fix/keyboard-fix'
 
 import { HttpModule } from '@angular/http';
-
+import { ApiService } from '../service/api.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,6 @@ import { HttpModule } from '@angular/http';
     SendMessagePage,
     ChatBubble,
     keyboardFix
-
   ],
   imports: [
     BrowserModule,
@@ -54,6 +53,7 @@ import { HttpModule } from '@angular/http';
   ],
   providers: [
     Contacts,
+    ApiService,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

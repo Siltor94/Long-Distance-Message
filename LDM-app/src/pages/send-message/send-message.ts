@@ -3,6 +3,7 @@ import { Content, NavParams, NavController, Platform } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ApiService } from '../../service/api.service';
 
 @Component({
   selector: 'send-message-page',
@@ -16,40 +17,48 @@ export class SendMessagePage {
   private millis = 200;
   private scrollTimeout = this.millis + 50;
   private textareaHeight;
-  private scrollContentElelment: any;
+  private scrollContentElement: any;
   private footerElement: any;
   private initialTextAreaHeight;
   private user;
-  private keyboardHideSub;
-  private keybaordShowSub;
   private message = "";
+  private messageObject: Object;
 
-  constructor(private camera: Camera, private keyboard: Keyboard, private imagePicker: ImagePicker, public platform: Platform, public renderer: Renderer, public navParams: NavParams, public navCtrl: NavController) {
+  constructor(
+    private camera: Camera,
+    private keyboard: Keyboard,
+    private imagePicker: ImagePicker,
+    private api: ApiService,
+    public platform: Platform,
+    public renderer: Renderer,
+    public navParams: NavParams,
+    public navCtrl: NavController) {
 
 
     this.user = navParams.get('user');
 
   }
 
+  // La text area ne s'ouvrira que si on clique dessus directement
+  // sinon la fonction bloque l'event
   footerTouchStart(event) {
     //console.log('footerTouchStart: ', event.type, event.target.localName, '...')
     if (event.target.localName !== "textarea") {
       event.preventDefault();
-      // console.log('preventing')
     }
   }
-
+  // On aggrandit la textarea
   textAreaChange() {
 
-    let newHeight = Number(this.inputElement.style.height.replace('px', ''));
+    let newHeight: number = Number(this.inputElement.style.height.replace('px', ''));
     if (newHeight !== this.textareaHeight) {
 
-      let diffHeight = newHeight - this.textareaHeight;
+      let diffHeight: number = newHeight - this.textareaHeight;
       this.textareaHeight = newHeight;
-      let newNumber = Number(this.scrollContentElelment.style.marginBottom.replace('px', '')) + diffHeight;
+      let newNumber: number = Number(this.scrollContentElement.style.marginBottom.replace('px', '')) + diffHeight;
 
-      let marginBottom = newNumber + 'px';
-      this.renderer.setElementStyle(this.scrollContentElelment, 'marginBottom', marginBottom);
+      let marginBottom: string = newNumber + 'px';
+      this.renderer.setElementStyle(this.scrollContentElement, 'marginBottom', marginBottom);
       this.updateScroll('textAreaChange', this.scrollTimeout);
     }
   }
@@ -57,46 +66,12 @@ export class SendMessagePage {
   back(event: Event) {
 
     this.inputElement.blur();
-    this.navCtrl.pop().then(() => {
-      if (this.platform.is('ios')) {
-        this.removeKeyboardListeners();
-      }
-    });
-  }
-
-  removeKeyboardListeners() {
-    this.keyboardHideSub.unsubscribe();
-    this.keybaordShowSub.unsubscribe();
-  }
-
-  addKeyboardListeners() {
-
-    this.keyboardHideSub = this.keyboard.onKeyboardHide().subscribe(() => {
-      let newHeight = this.textareaHeight - this.initialTextAreaHeight + 44;
-      let marginBottom = newHeight + 'px';
-      console.log('marginBottom', marginBottom)
-      this.renderer.setElementStyle(this.scrollContentElelment, 'marginBottom', marginBottom);
-      this.renderer.setElementStyle(this.footerElement, 'marginBottom', '0px')
-    });
-
-    this.keybaordShowSub = this.keyboard.onKeyboardShow().subscribe((e) => {
-
-      let newHeight = (e['keyboardHeight']) + this.textareaHeight - this.initialTextAreaHeight;
-      let marginBottom = newHeight + 44 + 'px';
-      console.log('marginBottom', marginBottom)
-      this.renderer.setElementStyle(this.scrollContentElelment, 'marginBottom', marginBottom);
-      this.renderer.setElementStyle(this.footerElement, 'marginBottom', e['keyboardHeight'] + 'px');
-      this.updateScroll('keybaord show', this.scrollTimeout);
-    });
+    this.navCtrl.pop();
   }
 
   ionViewDidLoad() {
 
-    if (this.platform.is('ios')) {
-      this.addKeyboardListeners()
-    }
-
-    this.scrollContentElelment = this.content.getScrollElement();
+    this.scrollContentElement = this.content.getScrollElement();
 
     this.footerElement = document.getElementsByTagName('send-message-page')[0].getElementsByTagName('ion-footer')[0];
     this.inputElement = document.getElementsByTagName('send-message-page')[0].getElementsByTagName('textarea')[0];
@@ -104,7 +79,7 @@ export class SendMessagePage {
     this.footerElement.style.cssText = this.footerElement.style.cssText + "transition: all " + this.millis + "ms; -webkit-transition: all " +
       this.millis + "ms; -webkit-transition-timing-function: ease-out; transition-timing-function: ease-out;"
 
-    this.scrollContentElelment.style.cssText = this.scrollContentElelment.style.cssText + "transition: all " + this.millis + "ms; -webkit-transition: all " +
+    this.scrollContentElement.style.cssText = this.scrollContentElement.style.cssText + "transition: all " + this.millis + "ms; -webkit-transition: all " +
       this.millis + "ms; -webkit-transition-timing-function: ease-out; transition-timing-function: ease-out;"
 
     this.textareaHeight = Number(this.inputElement.style.height.replace('px', ''));
@@ -133,11 +108,6 @@ export class SendMessagePage {
   //   outputType: 1 // default .FILE_URI
 
   // };
-
-
-
-
-
 
   touchImageButton() {
     event.preventDefault();
@@ -195,23 +165,35 @@ export class SendMessagePage {
 
   sendMessage() {
 
+    this.messageObject = { msg: this.message, num: '0638157701' }
+    let strMessageObject = JSON.stringify(this.messageObject);
+    let jsonObject = JSON.parse(strMessageObject);
+
+    this.api.postMessage(jsonObject).then((data) => {
+      console.log("data");
+      console.log(data);
+    }, (err) => {
+      console.log("error");
+      console.log(err);
+    });
+
     this.addMessage('right', this.message);
     this.message = "";
 
-    let currentHeight = this.scrollContentElelment.style.marginBottom.replace('px', '');
+    let currentHeight = this.scrollContentElement.style.marginBottom.replace('px', '');
     let newHeight = currentHeight - this.textareaHeight + this.initialTextAreaHeight;
     let top = newHeight + 'px';
-    this.renderer.setElementStyle(this.scrollContentElelment, 'marginBottom', top);
+    this.renderer.setElementStyle(this.scrollContentElement, 'marginBottom', top);
     this.updateScroll('sendMessage', this.scrollTimeout);
     this.textareaHeight = this.initialTextAreaHeight;
 
 
     //DUMMY response message
-    setTimeout(() => {
-      let msg = "random reply to your amazing message is here";
-      this.addMessage('left', msg)
-      this.updateScroll('reply message', this.scrollTimeout);
-    }, 3000);
+    // setTimeout(() => {
+    //   let msg = "random reply to your amazing message is here";
+    //   this.addMessage('left', msg)
+    //   this.updateScroll('reply message', this.scrollTimeout);
+    // }, 3000);
 
   }
 

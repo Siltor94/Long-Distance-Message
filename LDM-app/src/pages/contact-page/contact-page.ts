@@ -8,12 +8,12 @@ import { Contacts } from '@ionic-native/contacts';
   templateUrl: 'contact-page.html'
 })
 export class contactPage {
-  test:any;
+  info:any;
   chats = [];
   contacts = []
   groupedContacts = []
 
   constructor(public navCtrl: NavController , public navParams: NavParams, public contact: Contacts) {
-    this.test = this.navParams.get("param");
+    this.info = this.navParams.get("param");
 }
 }

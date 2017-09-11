@@ -102,24 +102,8 @@ export class SendMessagePage {
     this.sendMessage();
   }
 
-  // private options = {
-  //   maximumImagesCount: 3,
-  //   width: 300,
-  //   height: 300,
-  //   quality: 75,
-  //   outputType: 1 // default .FILE_URI
-
-  // };
-
   touchImageButton() {
     event.preventDefault();
-    // this.imagePicker.getPictures(this.options).then((results) => {
-    //   for (var i = 0; i < results.length; i++) {
-    //     console.log('Image URI: ' + results[i]);
-
-    //   }
-    // }, (err) => { });
-
 
     const camerOptions: CameraOptions = {
       quality: 100,
@@ -167,16 +151,18 @@ export class SendMessagePage {
 
   sendMessage() {
 
-    this.messageObject = { msg: this.message, num: '0638157701' }
+    this.messageObject = { msg: this.message, num: this.value.toString() };
     let strMessageObject = JSON.stringify(this.messageObject);
     let jsonObject = JSON.parse(strMessageObject);
 
     this.api.postMessage(jsonObject).then((data) => {
       console.log("data");
       console.log(data);
+      alert(data);
     }, (err) => {
       console.log("error");
       console.log(err);
+      alert(err);
     });
 
     this.addMessage('right', this.message);
@@ -188,15 +174,6 @@ export class SendMessagePage {
     this.renderer.setElementStyle(this.scrollContentElement, 'marginBottom', top);
     this.updateScroll('sendMessage', this.scrollTimeout);
     this.textareaHeight = this.initialTextAreaHeight;
-
-
-    //DUMMY response message
-    // setTimeout(() => {
-    //   let msg = "random reply to your amazing message is here";
-    //   this.addMessage('left', msg)
-    //   this.updateScroll('reply message', this.scrollTimeout);
-    // }, 3000);
-
   }
 
 

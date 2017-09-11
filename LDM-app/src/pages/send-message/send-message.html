@@ -7,7 +7,11 @@
         </button>
 		</ion-buttons>
 
-		<ion-title>{{user}}</ion-title>
+		<!-- <ion-title>{{user}}</ion-title> -->
+		<ion-item>
+			<ion-label color="primary" floating>{{user}}</ion-label>
+			<ion-input type="tel" [(ngModel)]="value"></ion-input>
+		</ion-item>
 	</ion-navbar>
 </ion-header>
 

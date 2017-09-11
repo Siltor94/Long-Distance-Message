@@ -23,6 +23,7 @@ export class SendMessagePage {
   private user;
   private message = "";
   private messageObject: Object;
+  private value : number;
 
   constructor(
     private camera: Camera,
@@ -36,6 +37,7 @@ export class SendMessagePage {
 
 
     this.user = navParams.get('user');
+    this.value = navParams.get('num');
 
   }
 

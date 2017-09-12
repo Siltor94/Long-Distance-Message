@@ -13,7 +13,7 @@ export class MessagesPage {
   }
 
   showMessages(user: String){
-    this.navCtrl.push(SendMessagePage, {user: user, num: 0638157701})
+    this.navCtrl.push(SendMessagePage, {user: user, num: "0638157701"})
   }
 
   newMessage(){

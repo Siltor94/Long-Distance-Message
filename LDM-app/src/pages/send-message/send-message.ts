@@ -23,7 +23,7 @@ export class SendMessagePage {
   private user;
   private message = "";
   private messageObject: Object;
-  private value : number;
+  private value : string;
 
   constructor(
     private camera: Camera,
@@ -151,17 +151,23 @@ export class SendMessagePage {
 
   sendMessage() {
 
-    this.messageObject = { msg: this.message, num: this.value.toString() };
+    this.messageObject = { msg: this.message, num: this.value };
     let strMessageObject = JSON.stringify(this.messageObject);
     let jsonObject = JSON.parse(strMessageObject);
 
-    this.api.postMessage(jsonObject).then((data) => {
-      console.log("data");
-      console.log(data);
+    // this.api.postMessage(jsonObject).then((data) => {
+    //   console.log("data");
+    //   console.log(data);
+    //   alert(data);
+    // }, (err) => {
+    //   console.log("error");
+    //   console.log(err);
+    //   alert(err);
+    // });
+
+       this.api.getAPI().then((data) => {
       alert(data);
     }, (err) => {
-      console.log("error");
-      console.log(err);
       alert(err);
     });
 

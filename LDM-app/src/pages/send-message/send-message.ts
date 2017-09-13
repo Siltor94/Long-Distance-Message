@@ -71,6 +71,7 @@ export class SendMessagePage {
     this.navCtrl.pop();
   }
 
+  // on initialise le CSS du footer au chargement de la vue
   ionViewDidLoad() {
 
     this.scrollContentElement = this.content.getScrollElement();
@@ -92,12 +93,10 @@ export class SendMessagePage {
   }
 
   contentMouseDown(event) {
-    //console.log('blurring input element :- > event type:', event.type);
     this.inputElement.blur();
   }
 
   touchSendButton(event: Event) {
-    //console.log('touchSendButton, event type:', event.type);
     event.preventDefault();
     this.sendMessage();
   }
@@ -118,15 +117,13 @@ export class SendMessagePage {
     }
 
     this.camera.getPicture(camerOptions).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
 
       this.addImage('right', base64Image);
       console.log(base64Image);
       this.updateScroll('image add', this.millis)
     }, (err) => {
-      // Handle error
+      console.log(err);
     });
 
   }
@@ -139,6 +136,7 @@ export class SendMessagePage {
     });
   }
 
+  // Crée l'objet a push dans l'array messages
   addMessage(position, msg) {
 
     this.messages.push({
@@ -149,26 +147,19 @@ export class SendMessagePage {
 
   }
 
+  // Envoi du sms, on récupère le contenu de la textarea this.message, et le numro de téléphone this.value
+  // Que l'on formate en un objet JSON.
+  // Puis on envoi le sms avec une requête post à l'api et on crée le sms sur la view en l'ajoutant dans l'array messages
   sendMessage() {
 
     this.messageObject = { msg: this.message, num: this.value };
     let strMessageObject = JSON.stringify(this.messageObject);
     let jsonObject = JSON.parse(strMessageObject);
 
-    // this.api.postMessage(jsonObject).then((data) => {
-    //   console.log("data");
-    //   console.log(data);
-    //   alert(data);
-    // }, (err) => {
-    //   console.log("error");
-    //   console.log(err);
-    //   alert(err);
-    // });
-
-       this.api.getAPI().then((data) => {
-      alert(data);
+    this.api.postMessage(jsonObject).then((data) => {
+      console.log(data);
     }, (err) => {
-      alert(err);
+      console.log(err);
     });
 
     this.addMessage('right', this.message);
@@ -192,6 +183,7 @@ export class SendMessagePage {
     }, timeout);
   }
 
+  // L'array qui contient tout les messages de la conversation, s'update à chaque nouveau message
   public messages: any[] = [
     {
       position: 'left',

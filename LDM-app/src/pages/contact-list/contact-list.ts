@@ -15,6 +15,7 @@ export class contactList {
   contacts = []
   groupedContacts = []
 
+  // we fetch the user contact on the phone
   constructor(public navCtrl: NavController, public contact: Contacts) {
 
     contact.find(["displayName", "phoneNumbers"], {multiple: true, hasPhoneNumber: true}).then((contacts) => {
@@ -37,6 +38,7 @@ go_contact(txt) {
   this.navCtrl.push(contactPage, {param : txt});
 }
 
+// we sort the contact by letter for a better display and add the title letter for each existing one
 groupContacts(contacts){
 
   let sortedContacts = contacts.sort(function(a, b){

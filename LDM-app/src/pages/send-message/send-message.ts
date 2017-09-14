@@ -66,7 +66,6 @@ export class SendMessagePage {
   }
 
   back(event: Event) {
-
     this.inputElement.blur();
     this.navCtrl.pop();
   }

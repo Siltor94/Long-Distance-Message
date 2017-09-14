@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { SendMessagePage } from '../send-message/send-message';
+
 
 @Component({
   selector: 'page-messages',
@@ -8,12 +9,16 @@ import { SendMessagePage } from '../send-message/send-message';
 })
 export class MessagesPage {
 
+  public conv;
+  public items: any[];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.items = this.navParams.get("conv");
+    
   }
 
-  showMessages(user: String){
-    this.navCtrl.push(SendMessagePage, {user: user, num: "0638157701"})
+  showMessages(username: String, phoneNumber: String){
+    this.navCtrl.push(SendMessagePage, {user: username, num: phoneNumber})
   }
 
   newMessage(){

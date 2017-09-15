@@ -23,7 +23,8 @@ export class SendMessagePage {
   private user;
   private message = "";
   private messageObject: Object;
-  private value : string;
+  private value: string;
+  private myconv;
 
   constructor(
     private camera: Camera,
@@ -38,6 +39,20 @@ export class SendMessagePage {
 
     this.user = navParams.get('user');
     this.value = navParams.get('num');
+    this.myconv = navParams.get('myconv');
+
+    // console.log(this.value);
+    // api.getConvData(this.value).subscribe(res => this.myconv = res);
+    console.log(this.myconv);
+    if (this.myconv) {
+      this.myconv.messages.forEach(element => {
+        this.messages.push({
+          position: element.pos,
+          body: element.msg,
+          timestamp: element.date,
+        })
+      });
+    }
 
   }
 
@@ -185,9 +200,7 @@ export class SendMessagePage {
   // L'array qui contient tout les messages de la conversation, s'update à chaque nouveau message
   public messages: any[] = [
     {
-      position: 'left',
-      body: 'aaa',
-      timestamp: new Date(),
+
     }
   ];
 

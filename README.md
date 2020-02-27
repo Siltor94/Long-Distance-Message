@@ -1,5 +1,5 @@
 # Long-Distance-Message
-Projet Innovant 2eme année Prep'ETNA
+Projet Innovant 2eme année Prep'ETNA: Application permettant d'envoyer des sms via un raspebry pi
 
 ionic cordova plugin add cordova-plugin-contacts
 
